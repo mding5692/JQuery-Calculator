@@ -2,68 +2,86 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<title> JQuery Calculator </title>
 	</head>
 	<body>
+
+	<style>
+
+		section {
+			padding: 2em;
+		}
+
+		.display {
+			height: 5em;
+            color: #333;
+		}
+
+
+	</style>
+
 		<section id="calculator">
-			<div id="display">
+			<div class="display">
+
+			</div>
 
 			<div id="numbersContainer">
 				<table id="numbers">
 					<tr>
 						<td>
-							<button id="one">1</button>
+							<button class="number" id="one">1</button>
 						</td>
 						<td>	
-							<button id="two">2</button>
+							<button class="number" id="two">2</button>
 						</td>
 						<td>
-							<button id="three">3</button>
+							<button class="number" id="three">3</button>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<button id="four">4</button>
+							<button class="number" id="four">4</button>
 						</td>
 						<td>	
-							<button id="five">5</button>
+							<button class="number" id="five">5</button>
 						</td>
 						<td>
-							<button id="six">6</button>
+							<button class="number" id="six">6</button>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<button id="seven">7</button>
+							<button class="number" id="seven">7</button>
 						</td>
 						<td>	
-							<button id="eight">8</button>
+							<button class="number" id="eight">8</button>
 						</td>
 						<td>
-							<button id="nine">9</button>
+							<button class="number" id="nine">9</button>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<button id="zero">0</button>
+							<button class="number" id="zero">0</button>
 						</td>
 					</tr>
 				</table>
 				<table id="operators">
 					<tr>
 						<td>
-							<button id="plus">+</button>
+							<button class="operator" id="plus">+</button>
 						</td>
 						<td>	
-							<button id="minus">-</button>
+							<button class="operator" id="minus">-</button>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<button id="divide">/</button>
+							<button class="operator" id="divide">/</button>
 						</td>
 						<td>
-							<button id="times">x</button>
+							<button class="operator" id="times">x</button>
 						</td>
 					</tr>
 				</table>
@@ -72,6 +90,18 @@
 
 		</section>
 
+		<script>
+
+
+        var storedCalculation = '';
+
+        $('.number, .operator').click(function () {
+             var numberOrOperator = $(this).html();
+            storedCalculation += numberOrOperator;
+            $('.display').html(storedCalculation);
+         });
+
+		</script>
 
 	</body>
 </html>
