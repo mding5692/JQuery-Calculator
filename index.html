@@ -11,11 +11,23 @@
 
 		section {
 			padding: 2em;
+			background: #333;
+			width: 10em;
+			margin: 2em;
+			border-radius: 10px;
 		}
 
 		.display {
+			border-radius: 5px;
 			height: 5em;
             color: #333;
+            background: #fff;
+            margin-bottom: 2em;
+            padding: 1em;
+		}
+
+		button {
+			border-radius: 5px;
 		}
 
 
@@ -38,6 +50,15 @@
 						<td>
 							<button class="number" id="three">3</button>
 						</td>
+						<td>
+							&nbsp;
+						</td>
+						<td>
+							<button class="operator" id="plus">+</button>
+						</td>
+						<td>	
+							<button class="operator" id="minus">-</button>
+						</td>
 					</tr>
 					<tr>
 						<td>
@@ -48,6 +69,15 @@
 						</td>
 						<td>
 							<button class="number" id="six">6</button>
+						</td>
+						<td>
+							&nbsp;
+						</td>
+						<td>
+							<button class="operator" id="divide">/</button>
+						</td>
+						<td>
+							<button class="operator" id="times">x</button>
 						</td>
 					</tr>
 					<tr>
@@ -65,23 +95,11 @@
 						<td>
 							<button class="number" id="zero">0</button>
 						</td>
-					</tr>
-				</table>
-				<table id="operators">
-					<tr>
 						<td>
-							<button class="operator" id="plus">+</button>
-						</td>
-						<td>	
-							<button class="operator" id="minus">-</button>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<button class="operator" id="divide">/</button>
+						&nbsp;
 						</td>
 						<td>
-							<button class="operator" id="times">x</button>
+							<button class="equals_button" id="equals">=</button>
 						</td>
 					</tr>
 				</table>
@@ -94,12 +112,25 @@
 
 
         var storedCalculation = '';
+        var numOfOperatorsPressed = 0;
 
         $('.number, .operator').click(function () {
              var numberOrOperator = $(this).html();
             storedCalculation += numberOrOperator;
             $('.display').html(storedCalculation);
+            if ($(this).is('.operator') ) {
+            	numOfOperatorsPressed++;
+            	
+            }
          });
+
+        $('.equals_button').click(function() {
+        	if (numOfOperators <= 1) {
+
+        	} else {
+        		$('.display').html("Error, more than one operator");
+        	}
+        })
 
 		</script>
 
