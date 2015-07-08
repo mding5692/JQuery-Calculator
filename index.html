@@ -96,7 +96,7 @@
 							<button class="number" id="zero">0</button>
 						</td>
 						<td>
-						&nbsp;
+							<button class="dot">.</button>
 						</td>
 						<td>
 							<button class="equals_button" id="equals">=</button>
@@ -110,17 +110,36 @@
 
 		<script>
 
-
-        var storedCalculation = '';
+		var calculationSum = 0;
+        var storedCalculation = "";
         var numOfOperatorsPressed = 0;
+        var display = $('.display'); // display screen
 
-        $('.number, .operator').click(function () {
+        function operatorIsPressed(operator, firstVal, secondVal) {
+        	if ( (operator).is($('#plus') ) ) {
+        		firstVal += secondVal;
+        	} else if ((operator).is($('#minus') ) ) {
+        		firstVal -= secondVal;
+        	} else if ( (operator).is($('divide'))) {
+        		firstVal /= secondVal;
+        	} else {
+        		firstVal *= secondVal;
+        	}
+        	var result = firstVal;
+        	return result;
+        }
+
+        function equals() {
+
+        }
+
+        $('.number, .operator, .dot').click(function () {
              var numberOrOperator = $(this).html();
             storedCalculation += numberOrOperator;
-            $('.display').html(storedCalculation);
+            display.html(storedCalculation);
             if ($(this).is('.operator') ) {
-            	numOfOperatorsPressed++;
-            	
+            	calculationSum = parseFloat(storedCalculation);
+
             }
          });
 
@@ -128,7 +147,7 @@
         	if (numOfOperators <= 1) {
 
         	} else {
-        		$('.display').html("Error, more than one operator");
+        		display.text("Error, more than one operator");
         	}
         })
 
