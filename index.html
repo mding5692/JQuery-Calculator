@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link href-"./style.css" rel="stylesheet">
+		<link rel="stylesheet" href="./style.css">
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<title> JQuery Calculator </title>
 	</head>
@@ -92,6 +92,7 @@
         var display = $('.display'); // display screen
         var waitingForSecondNumber = false; // tells if we're still waiting for a second number
         var secondNumber = ""; // the second number
+        var savedOperator; // a saved operator
 
 
         /**
@@ -101,12 +102,12 @@
          * @param  {[type]} secondVal the second value to be operated on
          * @return {[type]}           result of first value and second value after function
          */
-        function operatorIsPressed(operator, firstVal, secondVal) {
+        function equalsIsPressed(operator, firstVal, secondVal) {
         	if ( (operator).is($('#plus') ) ) {
         		firstVal += secondVal;
         	} else if ((operator).is($('#minus') ) ) {
         		firstVal -= secondVal;
-        	} else if ( (operator).is($('divide'))) {
+        	} else if ( (operator).is($('#divide'))) {
         		firstVal /= secondVal;
         	} else {
         		firstVal *= secondVal;
@@ -135,6 +136,14 @@
         	numbersPressed = new Array();
         }
 
+        function saveOperator(operator) {
+        	if (saveOperator) {
+        		alert("already has another operator, error!");
+        	} else {
+        	savedOperator = operator.html();
+        	}
+        }
+
         /**
          * Displays it on the display screen
          * @param  {[type]} ) {                        var numberOrOperator [description]
@@ -157,10 +166,15 @@
         		storedCalculation += number;
         		displayToScreen(storedCalculation);
         	});
-        	$('.operator').click(function() {
-        		addToNumbersPressed(storedCalculation);
+        	$('.operator').click(function(){
+        		var operator = $(this).html();
+        		saveOperator(operator);
         	});
-
+        	$('.equals_button').click(function() {
+        		addToNumbersPressed(storedCalculation);
+        		equalsIsPressed(savedOperator, numbersPressed[0], numbersPressed[1]);
+        		waitingForSecondNumber = false;
+        	});
         }
 
 		</script>
